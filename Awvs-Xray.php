@@ -7,12 +7,12 @@ $GLOBALS['AwvsUrl'] = "https://localhost:3443";//Awvs Url
 if ($Type = true) {
 $GLOBALS['XrayUrl']  = '127.0.0.1';//Xray Port
 $GLOBALS['XrayIp'] = '8111';// Xray Ip
-$GLOBALS['ScanTypen'] = '7';
+$GLOBALS['ScanType'] = '7';
 }
 else
 {
 $GLOBALS['XrayUrl']  = $GLOBALS['XrayIp'] = '';
-$GLOBALS['ScanTypen'] = '1';
+$GLOBALS['ScanType'] = '1';
 }
 setcookie("ui_session",'');
 
@@ -77,7 +77,7 @@ $options = array(
 );
 $context = stream_context_create($options);
 $result = file_get_contents($url.'/api/v1/targets/'.file_get_contents('target_id.txt').'/configuration', false, $context);
-$add_targets_scans_data = '{"target_id":"'.file_get_contents('target_id.txt').'","profile_id":"11111111-1111-1111-1111-11111111111'.$GLOBALS['ScanTypen'].'","schedule":{"disable":false,"start_date":null,"time_sensitive":false},"ui_session_id":"2dd9f618c0ca36fb1fe8a3aa8a2a173a"}';
+$add_targets_scans_data = '{"target_id":"'.file_get_contents('target_id.txt').'","profile_id":"11111111-1111-1111-1111-11111111111'.$GLOBALS['ScanType'].'","schedule":{"disable":false,"start_date":null,"time_sensitive":false},"ui_session_id":"2dd9f618c0ca36fb1fe8a3aa8a2a173a"}';
 return Add_Targets_Scans($GLOBALS['AwvsUrl'],$add_targets_scans_data);
 }
 function Add_Targets_Scans($url, $post_data) {
