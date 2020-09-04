@@ -1,2 +1,2 @@
 # Awvs-Xray
-Awvs批量导入目标 + 可选式主动扫描 Or 爬虫模式并对接Xray
+Awvs 批量添加扫描/删除任务 + 可选式对接Xray 自动化挖洞
