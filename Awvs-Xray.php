@@ -1,17 +1,18 @@
 <?php
 Error_reporting(0);
-$Type = flase; // flase = Awvs自主扫描 ; true = Awvs爬虫模式 Ps:需打开Xray 
+$Type = 'flase'; // flase = Awvs自主扫描 ; true = Awvs爬虫模式 Ps:需打开Xray 
 $GLOBALS['AwvsUser']  = '';//Awvs User
 $GLOBALS['AwvsPassWord']  = '';//Awvs PassWord
 $GLOBALS['AwvsUrl'] = "https://localhost:3443";//Awvs Url
-if ($Type = true) {
-$GLOBALS['XrayUrl']  = '127.0.0.1';//Xray Port
-$GLOBALS['XrayIp'] = '8111';// Xray Ip
+if ($Type == 'true') 
+{
+$GLOBALS['XrayIp']  = '127.0.0.1';//Xray IP
+$GLOBALS['XrayPort'] = '8111';// Xray Port
 $GLOBALS['ScanType'] = '7';
 }
-else
+else if($Type == 'flase')
 {
-$GLOBALS['XrayUrl']  = $GLOBALS['XrayIp'] = '';
+$GLOBALS['XrayIp']  = $GLOBALS['XrayPort'] = '';
 $GLOBALS['ScanType'] = '1';
 }
 setcookie("ui_session",'');
@@ -63,7 +64,7 @@ $context = stream_context_create($options);
 $result = file_get_contents($url.'/api/v1/targets', false, $context);
 $Array = json_decode($result,true);
 file_put_contents('target_id.txt',$Array['target_id']);
-$add_targets_proxy_data = '{"proxy":{"enabled":true,"address":"'.$GLOBALS['XrayUrl'].'","protocol":"http","port":'.$GLOBALS['XrayIp'].'}}';
+$add_targets_proxy_data = '{"proxy":{"enabled":true,"address":"'.$GLOBALS['XrayIp'].'","protocol":"http","port":'.$GLOBALS['XrayPort'].'}}';
 return Add_Targets_Proxy($GLOBALS['AwvsUrl'],$add_targets_proxy_data);
 }
 function Add_Targets_Proxy($url, $post_data) {
